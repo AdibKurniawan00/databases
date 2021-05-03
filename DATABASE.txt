@@ -1,0 +1,158 @@
+1. 	=> create database adib_kurniawan;
+	=> use adib_kurniawan;
+	=> source C:\Users\ASUS\Downloads\indonesia.sql;
+
+2. 
+mysql> show tables;
++--------------------------+
+| Tables_in_adib_kurniawan |
++--------------------------+
+| districts                |
+| provinces                |
+| regencies                |
+| villages                 |
++--------------------------+
+4 rows in set (0.01 sec)
+
+select * from disrticts;
+7215 rows in set (0.02 sec)
+select * from provinces;
+34 rows in set (0.01 sec)
+select * from regencies;
+514 rows in set (0.01 sec)
+select * from villages;
+80534 rows in set (0.15 sec)
+
+3. mysql> alter table provinces rename to provinsi;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_adib_kurniawan |
++--------------------------+
+| districts                |
+| provinsi                 |
+| regencies                |
+| villages                 |
++--------------------------+
+4 rows in set (0.01 sec)
+
+4. mysql> alter table regencies rename to kabupaten_kota;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_adib_kurniawan |
++--------------------------+
+| districts                |
+| kabupaten_kota           |
+| provinsi                 |
+| villages                 |
++--------------------------+
+4 rows in set (0.00 sec)
+
+5.mysql> alter table districts rename to kecamatan;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_adib_kurniawan |
++--------------------------+
+| kabupaten_kota           |
+| kecamatan                |
+| provinsi                 |
+| villages                 |
++--------------------------+
+4 rows in set (0.01 sec)
+
+6.mysql> alter table villages rename to desa;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> show tables;
++--------------------------+
+| Tables_in_adib_kurniawan |
++--------------------------+
+| desa                     |
+| kabupaten_kota           |
+| kecamatan                |
+| provinsi                 |
++--------------------------+
+4 rows in set (0.00 sec)
+
+7.  mysql> select desa.district_id, desa.name, provinsi.name from desa, provinsi where desa.district_id = 1101010 and provinsi.name = 'ACEH';
++-------------+-----------------+------+
+| district_id | name            | name |
++-------------+-----------------+------+
+| 1101010     | LATIUNG         | ACEH |
+| 1101010     | LABUHAN BAJAU   | ACEH |
+| 1101010     | SUAK LAMATAN    | ACEH |
+| 1101010     | ANA AO          | ACEH |
+| 1101010     | LATALING        | ACEH |
+| 1101010     | PULAU BENGKALAK | ACEH |
+| 1101010     | BADEGONG        | ACEH |
+| 1101010     | KEBUN BARU      | ACEH |
+| 1101010     | ULUL MAYANG     | ACEH |
+| 1101010     | PASIR TINGGI    | ACEH |
+| 1101010     | LABUHAN JAYA    | ACEH |
+| 1101010     | LABUHAN BAKTI   | ACEH |
+| 1101010     | BATU RALANG     | ACEH |
+| 1101010     | ALUS ALUS       | ACEH |
+| 1101010     | SEUNEUBOK       | ACEH |
+| 1101010     | BLANG SEBEL     | ACEH |
+| 1101010     | TRANS BARU      | ACEH |
+| 1101010     | TRANS MERANTI   | ACEH |
+| 1101010     | TRANS JERNGE    | ACEH |
++-------------+-----------------+------+
+19 rows in set (0.03 sec)
+
+8. mysql> update kecamatan set name = 'TEUPAH SELATAN' where regency_id = 1101;
+Query OK, 9 rows affected (0.03 sec)
+Rows matched: 10  Changed: 9  Warnings: 0
+
+mysql> select kecamatan.regency_id, kecamatan.name, provinsi.name from kecamatan, provinsi where kecamatan.name = 'TEUPAH SELATAN' and provinsi.name ='ACEH';
++------------+----------------+------+
+| regency_id | name           | name |
++------------+----------------+------+
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
+| 1101       | TEUPAH SELATAN | ACEH |
++------------+----------------+------+
+10 rows in set (0.00 sec)
+
+9. mysql> update kabupaten_kota set name = 'KABUPATEN SIMEULUE' ORDER BY id ;
+Query OK, 513 rows affected (0.03 sec)
+Rows matched: 514  Changed: 513  Warnings: 0
+mysql> select kabupaten_kota.id, kabupaten_kota.name, provinsi.name from kabupaten_kota, provinsi where kabupaten_kota.name = 'KABUPATEN SIMEULUE' and provinsi.name = 'ACEH';
++------+--------------------+------+
+| id   | name               | name |
++------+--------------------+------+
+| 1101 | KABUPATEN SIMEULUE | ACEH |
+| 1102 | KABUPATEN SIMEULUE | ACEH |
+| 1103 | KABUPATEN SIMEULUE | ACEH |
+| 1104 | KABUPATEN SIMEULUE | ACEH |
+| 1105 | KABUPATEN SIMEULUE | ACEH |
+| 1106 | KABUPATEN SIMEULUE | ACEH |
+| 1107 | KABUPATEN SIMEULUE | ACEH |
+| 1108 | KABUPATEN SIMEULUE | ACEH |
+| 1109 | KABUPATEN SIMEULUE | ACEH |
+| 1110 | KABUPATEN SIMEULUE | ACEH |
+| 1111 | KABUPATEN SIMEULUE | ACEH |
+| 1112 | KABUPATEN SIMEULUE | ACEH |
+| 1113 | KABUPATEN SIMEULUE | ACEH |
+| 1114 | KABUPATEN SIMEULUE | ACEH |
+| 1115 | KABUPATEN SIMEULUE | ACEH |
+| 1116 | KABUPATEN SIMEULUE | ACEH |
+| 1117 | KABUPATEN SIMEULUE | ACEH |
+| 1118 | KABUPATEN SIMEULUE | ACEH |
+
+10.C:\xampp\mysql\bin>mysqldump -u root -p adib_kurniawan > adib_kurniawan.sql
+Enter password:
+mysqldump: Got error: 1045: "Access denied for user 'root'@'localhost' (using password: NO)" when trying to connect
+"dont know why, and im stuck :("
